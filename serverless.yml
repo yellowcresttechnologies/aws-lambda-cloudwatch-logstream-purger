@@ -1,0 +1,48 @@
+# Copyright © 2020 YellowCrest Technologies
+service: aws-lambda-cloudwatch-logstream-purger
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  region: us-east-1
+  iamRoleStatements:
+    - Effect: 'Allow'
+      Action:
+        - 'logs:DescribeLogGroups'
+        - 'logs:DescribeLogStreams'
+        - 'logs:DeleteLogStream'
+      Resource:
+        - '*'
+
+layers:
+  logstreamPurger:
+    path: layers
+    description: Lambda layer for purging old empty CloudWatch log streams
+
+functions:
+  purgeLogSteams:
+    description: Purges old empty CloudWatch log streams
+    handler: handler.purgeLogSteams
+    memorySize: 192
+    timeout: 300
+    events:
+      - schedule: rate(1 day)
+    layers:
+      - { Ref: LogstreamPurgerLambdaLayer }
+
+
+package:
+  exclude:
+    - layers/**
+    - LICENSE
+    - local.js
+    - node_modules/**
+    - package-lock.json
+    - README.md
+
+resources:
+  Resources:
+    # Set the CloudWatch Log Retention to 14 days
+    PurgeLogSteamsLogGroup:
+      Properties:
+        RetentionInDays: 14

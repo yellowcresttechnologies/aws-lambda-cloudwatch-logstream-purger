@@ -1,0 +1,13 @@
+{
+  "name": "aws-cloudwatch-logstream-purger-lambda-layer",
+  "version": "1.0.0",
+  "description": "Dependencies for aws-cloudwatch-logstream-purger-lambda-layer packages as an AWS Lambda layer",
+  "main": "index.js",
+  "author": "YellowCrest Technologies",
+  "license": "MIT",
+  "homepage": "https://github.com/yellowcresttechnologies/aws-lambda-cloudwatch-logstream-purger#readme",
+  "dependencies": {
+    "async": "^3.2.0",
+    "aws-sdk": "^2.656.0"
+  }
+}
