@@ -30,7 +30,7 @@ Within **src/logStreams.js** the following config settings can be changed to acc
 - `LOG_STREAM_GET_LIMIT`: The number of log streams to query for a given log group at one time. Defaults to 50.
 - `PURGE_AGE_MS`: The max age allowed for an empty log stream in milliseconds. Defaults to 14 days.
 - `AWS_DELAY`: A delay to add in between processing of a log group in milliseconds. Tweaking this value can help if you get throttled by AWS. Defaults to 1 second
-- `SHOW_PURGE_LOGS`: Flag to show which log streams are being purged. If you have a log of log streams this could get very noisy. Defaults to true.
+- `SHOW_PURGE_LOGS`: Flag to show which log streams are being purged. If you have a log of log streams this could get very noisy. Defaults to true. Keep in mind that retaining verbose logs will incur some CloudWatch charges. The default for logs created by this lambda function is to retain them for only 14 days
 - `SHOW_RETAIN_LOGS`: Flag to show which log streams are being retained. If you have a log of log streams this could get very noisy. Defaults to false.
 
 One note on the lambda function values in **serverless.yml**: We started with over 10,000 log streams and initially ran at the maximum 15 minute timeout for a lambda function. Once purged, 5 minutes nighly is more than sufficient.
