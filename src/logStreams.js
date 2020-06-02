@@ -144,7 +144,9 @@ function isPurgable(logStream = {}) {
   // Streams must be empty to purge
   if (logStream.storedBytes === 0) {
     // If the timestamp on the last event is older than 14 days old, then purge
-    if ((Date.now() - logStream.lastEventTimestamp) > PURGE_AGE_MS) doPurge = true;
+    // If last event timestamp is undefined, check creationTime
+    const timeToCheck = logStream.lastEventTimestamp || logStream.creationTime;
+    if ((Date.now() - timeToCheck) > PURGE_AGE_MS) doPurge = true;
   }
 
   return doPurge;
@@ -190,7 +192,7 @@ async function processLogGroup(logGroupName) {
         // Return on error
         if (logStreamsDelErr) return { processLogGroupErr: logStreamsDelErr };
       } else if (SHOW_RETAIN_LOGS) {
-        console.info(`Retaining ${logGroupName} ${logStream.logStreamName}`);
+        console.info(`Retaining ${logGroupName} ${logStream.logStreamName} ${logStream.storedBytes}`);
       }
 
       return null;

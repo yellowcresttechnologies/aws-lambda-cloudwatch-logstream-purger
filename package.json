@@ -1,6 +1,6 @@
 {
   "name": "aws-lambda-cloudwatch-logstream-purger",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "AWS Lambda function for purging old empty CloudWatch log streams",
   "main": "handler.js",
   "scripts": {
