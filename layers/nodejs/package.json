@@ -6,8 +6,12 @@
   "author": "YellowCrest Technologies",
   "license": "MIT",
   "homepage": "https://github.com/yellowcresttechnologies/aws-lambda-cloudwatch-logstream-purger#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yellowcresttechnologies/aws-lambda-cloudwatch-logstream-purger.git"
+  },
   "dependencies": {
-    "async": "^3.2.0",
-    "aws-sdk": "^2.656.0"
+    "async": "^3.2.1",
+    "lambda-log": "^3.1.0"
   }
 }

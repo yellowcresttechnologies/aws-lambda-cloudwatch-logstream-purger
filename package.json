@@ -1,11 +1,11 @@
 {
   "name": "aws-lambda-cloudwatch-logstream-purger",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "AWS Lambda function for purging old empty CloudWatch log streams",
   "main": "handler.js",
   "scripts": {
     "predeploy": "cd layers/nodejs && npm install",
-    "deploy": "sls deploy -v",
+    "deploy": "sls deploy --verbose",
     "lint": "eslint .",
     "run:local": "AWS_SDK_LOAD_CONFIG=true node local.js"
   },
@@ -22,13 +22,17 @@
   "license": "MIT",
   "homepage": "https://github.com/yellowcresttechnologies/aws-lambda-cloudwatch-logstream-purger#readme",
   "dependencies": {
-    "async": "^3.2.0",
-    "aws-sdk": "^2.656.0"
+    "async": "^3.2.1",
+    "aws-sdk": "^2.1015.0",
+    "lambda-log": "^3.1.0"
   },
   "devDependencies": {
-    "eslint": "^6.8.0",
-    "eslint-config-airbnb": "^18.1.0",
-    "eslint-config-airbnb-base": "^14.1.0",
-    "eslint-plugin-import": "^2.20.2"
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-react": "^7.26.1",
+    "eslint-plugin-react-hooks": "^4.2.0"
   }
 }

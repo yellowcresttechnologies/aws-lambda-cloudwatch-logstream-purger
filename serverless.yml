@@ -3,8 +3,9 @@ service: aws-lambda-cloudwatch-logstream-purger
 
 provider:
   name: aws
-  runtime: nodejs12.x
+  runtime: nodejs14.x
   region: us-east-1
+  lambdaHashingVersion: 20201221
   iamRoleStatements:
     - Effect: 'Allow'
       Action:
@@ -23,6 +24,7 @@ functions:
   purgeLogSteams:
     description: Purges old empty CloudWatch log streams
     handler: handler.purgeLogSteams
+    architecture: arm64
     memorySize: 192
     timeout: 300
     events:
@@ -44,5 +46,6 @@ resources:
   Resources:
     # Set the CloudWatch Log Retention to 14 days
     PurgeLogSteamsLogGroup:
+      Type: AWS::Logs::LogGroup
       Properties:
         RetentionInDays: 14

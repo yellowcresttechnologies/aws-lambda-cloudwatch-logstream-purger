@@ -3,6 +3,7 @@
  */
 const async = require('async');
 const CloudWatchLogsClient = require('aws-sdk/clients/cloudwatchlogs');
+const log = require('lambda-log');
 
 /**
  * Disabling no-await-in-loop as AWS calls paginate with nextToken. Can not
@@ -184,7 +185,7 @@ async function processLogGroup(logGroupName) {
       if (isPurgable(logStream)) {
         // Purge it!
         if (SHOW_PURGE_LOGS) {
-          console.info(`Purging ${logGroupName} ${logStream.logStreamName}`);
+          log.info(`Purging ${logGroupName} ${logStream.logStreamName}`);
         }
 
         const { logStreamsDelErr } = await deleteLogStream(logGroupName, logStream.logStreamName);
@@ -192,7 +193,7 @@ async function processLogGroup(logGroupName) {
         // Return on error
         if (logStreamsDelErr) return { processLogGroupErr: logStreamsDelErr };
       } else if (SHOW_RETAIN_LOGS) {
-        console.info(`Retaining ${logGroupName} ${logStream.logStreamName} ${logStream.storedBytes}`);
+        log.info(`Retaining ${logGroupName} ${logStream.logStreamName} ${logStream.storedBytes}`);
       }
 
       return null;
